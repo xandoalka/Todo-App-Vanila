@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/script.js" defer></script>
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <main>
+      <!-- <div class="loginPage">
+        <div class="header">
+          <button class="back-button">
+            <img
+              class="back-icon"
+              src="assets/images/arrow-left.png"
+              alt="back"
+            />
+          </button>
+          <h1>Login</h1>
+        </div>
+      </div> -->
+      <div class="container">
+        <div class="header">
+          <h1>Task Manager</h1>
+          <img class="signing-button" src="assets/images/user.png" alt="logo" />
+        </div>
+        <div class="todo">
+          <label for="todo-date">
+            <span>To-Do</span>
+            <input type="date" id="todo-date" />
+          </label>
+
+          <div class="todo-list">
+            <h3>To-Do List</h3>
+            <div class="todo-container">
+              <!-- <div class="todo-item">
+                <h4>Task 1</h4>
+                <p>06:00 - 07:00</p>
+                <p>Category</p>
+                <p class="todo-date">06/01/2024</p>
+                <button class="delete-task">
+                  <img src="assets/images/bin.png" alt="delete" />
+                </button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <button class="create-task">Create Task</button>
+      </div>
+      <div class="wrapper">
+        <div class="header">
+          <button class="back-button">
+            <img
+              class="back-icon"
+              src="assets/images/arrow-left.png"
+              alt="back"
+            />
+          </button>
+          <h1>Create Task</h1>
+          <img src="assets/images/user.png" alt="logo" />
+        </div>
+        <form onsubmit="createTask()" class="form">
+          <label for="task">
+            <span>Task</span>
+            <textarea id="task" required></textarea>
+          </label>
+          <label for="category">
+            <span>Category</span>
+            <input type="text" id="category" required />
+          </label>
+          <hr />
+          <label for="start-date">
+            <span>Start Date</span>
+            <input type="date" id="start-date" required />
+          </label>
+          <label for="end-date">
+            <span>End Date</span>
+            <input type="date" id="end-date" required />
+          </label>
+          <div class="times">
+            <label for="start-time">
+              <span>Start Time</span>
+              <input type="time" id="start-time" />
+            </label>
+            <label for="end-time">
+              <span>End Time</span>
+              <input type="time" id="end-time" />
+            </label>
+          </div>
+          <button type="submit" class="add-task">Add Task</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
