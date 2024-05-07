@@ -253,3 +253,7 @@ hr {
   border-radius: 0.5rem;
   cursor: pointer;
 }
+
+input{
+  background-color: #fff;
+}
