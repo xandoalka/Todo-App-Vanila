@@ -44,9 +44,8 @@ todoDate.addEventListener("change", function () {
 document.querySelector(".form").addEventListener("submit", createTask);
 document.addEventListener("DOMContentLoaded", loadTasks);
 document.addEventListener("DOMContentLoaded", todayDate);
-document.addEventListener("DOMContentLoaded", deleteExpiredTasks);
 
-setInterval(deleteExpiredTasks, 60000);
+setInterval(deleteExpiredTasks, 3000);
 
 function createTask() {
   const taskvalue = document.getElementById("task").value;
