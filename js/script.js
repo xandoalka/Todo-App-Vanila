@@ -41,6 +41,7 @@ todoDate.addEventListener("change", function () {
   }
 });
 
+document.querySelector(".form").addEventListener("submit", createTask);
 document.addEventListener("DOMContentLoaded", loadTasks);
 document.addEventListener("DOMContentLoaded", todayDate);
 document.addEventListener("DOMContentLoaded", deleteExpiredTasks);
@@ -153,7 +154,7 @@ function filterTasksByDate(selectedDate) {
 function deleteTask() {
   const taskElement = this.parentNode;
   taskElement.remove();
-  const taskName = taskElement.querySelector("h3").textContent;
+  const taskName = taskElement.querySelector("h4").textContent;
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks = tasks.filter((task) => task.taskvalue !== taskName);
   localStorage.setItem("tasks", JSON.stringify(tasks));
