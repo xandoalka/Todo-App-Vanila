@@ -47,7 +47,12 @@ document.addEventListener("DOMContentLoaded", todayDate);
 
 setInterval(deleteExpiredTasks, 3000);
 
+function generateId() {
+  return new Date();
+}
+
 function createTask() {
+  const id = generateId();
   const taskvalue = document.getElementById("task").value;
   const categoryValue = document.getElementById("category").value;
   const startDateValue = document.getElementById("start-date").value;
@@ -56,6 +61,7 @@ function createTask() {
   const endTimeValue = document.getElementById("end-time").value;
 
   saveTaskToLocalStorage({
+    id,
     taskvalue,
     categoryValue,
     startDateValue,
@@ -76,37 +82,7 @@ function loadTasks() {
 
   todoContainer.innerHTML = "";
 
-  tasks.forEach((taskData) => {
-    const task = document.createElement("div");
-    task.classList.add("todo-item");
-
-    const taskName = document.createElement("h4");
-    taskName.textContent = taskData.taskvalue;
-    task.appendChild(taskName);
-
-    const time = document.createElement("p");
-    time.textContent = `${taskData.startTimeValue} - ${taskData.endTimeValue}`;
-    task.appendChild(time);
-
-    const category = document.createElement("p");
-    category.textContent = taskData.categoryValue;
-    task.appendChild(category);
-
-    const date = document.createElement("p");
-    date.classList.add("todo-date");
-    date.textContent = taskData.startDateValue;
-    task.appendChild(date);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("delete-task");
-    const deleteIcon = document.createElement("img");
-    deleteIcon.src = "assets/images/bin.png";
-    deleteButton.appendChild(deleteIcon);
-    deleteButton.addEventListener("click", deleteTask);
-    task.appendChild(deleteButton);
-
-    todoContainer.appendChild(task);
-  });
+  tasks.forEach(renderTask);
 }
 
 function filterTasksByDate(selectedDate) {
@@ -117,46 +93,14 @@ function filterTasksByDate(selectedDate) {
 
   todoContainer.innerHTML = "";
 
-  filteredTasks.forEach((taskData) => {
-    const task = document.createElement("div");
-    task.classList.add("todo-item");
-
-    const taskName = document.createElement("h4");
-    taskName.textContent = taskData.taskvalue;
-    task.appendChild(taskName);
-
-    const time = document.createElement("p");
-    time.textContent = `${taskData.startTimeValue} - ${taskData.endTimeValue}`;
-    task.appendChild(time);
-
-    const category = document.createElement("p");
-    category.textContent = taskData.categoryValue;
-    task.appendChild(category);
-
-    const date = document.createElement("p");
-    date.classList.add("todo-date");
-    date.textContent = taskData.startDateValue;
-    task.appendChild(date);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("delete-task");
-    const deleteIcon = document.createElement("img");
-    deleteIcon.src = "assets/images/bin.png";
-    deleteButton.appendChild(deleteIcon);
-    deleteButton.addEventListener("click", deleteTask);
-    task.appendChild(deleteButton);
-
-    todoContainer.appendChild(task);
-  });
+  filteredTasks.forEach(renderTask);
 }
 
-function deleteTask() {
-  const taskElement = this.parentNode;
-  taskElement.remove();
-  const taskName = taskElement.querySelector("h4").textContent;
+function deleteTask(taskId) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks = tasks.filter((task) => task.taskvalue !== taskName);
+  tasks = tasks.filter((task) => task.id !== taskId);
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  loadTasks();
 }
 
 function todayDate() {
@@ -174,4 +118,37 @@ function deleteExpiredTasks() {
   });
   localStorage.setItem("tasks", JSON.stringify(tasks));
   loadTasks();
+}
+
+function renderTask(taskData) {
+  const task = document.createElement("div");
+  task.classList.add("todo-item");
+  task.id = taskData.id;
+
+  const taskName = document.createElement("h4");
+  taskName.textContent = taskData.taskvalue;
+  task.appendChild(taskName);
+
+  const time = document.createElement("p");
+  time.textContent = `${taskData.startTimeValue} - ${taskData.endTimeValue}`;
+  task.appendChild(time);
+
+  const category = document.createElement("p");
+  category.textContent = taskData.categoryValue;
+  task.appendChild(category);
+
+  const date = document.createElement("p");
+  date.classList.add("todo-date");
+  date.textContent = taskData.startDateValue;
+  task.appendChild(date);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete-task");
+  const deleteIcon = document.createElement("img");
+  deleteIcon.setAttribute("src", "assets/images/bin.png");
+  deleteButton.appendChild(deleteIcon);
+  deleteButton.addEventListener("click", () => deleteTask(taskData.id));
+  task.appendChild(deleteButton);
+
+  todoContainer.appendChild(task);
 }
