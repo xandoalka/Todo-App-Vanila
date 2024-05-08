@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", todayDate);
 setInterval(deleteExpiredTasks, 3000);
 
 function generateId() {
-  return new Date();
+  return +new Date();
 }
 
 function createTask() {
